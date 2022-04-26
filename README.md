@@ -20,11 +20,11 @@ optional arguments:
   -minp MINP  path to append minimum pvalue (optional)
 ```
 
-The `-g` option specifies the path to the input file containing (see below for the input format).
+The `-g` option specifies the path to the input file containing the tumor trees (see below for the input format).
 
-The parameter `-s` allows to set the minimum support of the trajectories to find (the minimum number of tumor trees in which any trajectory must be observed to be frequent).
+The parameter `-s` sets the minimum support of the trajectories to find (the minimum number of tumor trees in which any trajectory must be observed to be frequent).
 
-The flag `-p` allows to specify the type of statistical test to use for evaluating the significance of a frequent trajectory:
+The flag `-p` specifies the type of statistical test to use for evaluating the significance of a frequent trajectory:
 `0` is the statistical test in which alterations are assumed to be inserted uniformly and independently at random on the nodes, preserving the set of alterations of each patient and the topology of the tumor trees.
 `1` is the statistical test assuming that alterations are randomly permuted (preserving the number of alterations in each node).
 `2` is the statistical test that consider uniform and independent assignment of each alteration on a tree with random topology (that is sampled uniformly from the set of topologies of the cohort).
