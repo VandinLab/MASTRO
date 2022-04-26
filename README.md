@@ -21,8 +21,10 @@ optional arguments:
 ```
 
 The `-g` option specifies the path to the input file containing (see below for the input format).
+
 The parameter `-s` allows to set the minimum support of the trajectories to find (the minimum number of tumor trees in which any trajectory must be observed to be frequent).
-The flag `-p` allows to specify the type of statistical test to use for evaluating the significance of a frequent trajectory.
+
+The flag `-p` allows to specify the type of statistical test to use for evaluating the significance of a frequent trajectory:
 `0` is the statistical test in which alterations are assumed to be inserted uniformly and independently at random on the nodes, preserving the set of alterations of each patient and the topology of the tumor trees.
 `1` is the statistical test assuming that alterations are randomly permuted (preserving the number of alterations in each node).
 `2` is the statistical test that consider uniform and independent assignment of each alteration on a tree with random topology (that is sampled uniformly from the set of topologies of the cohort).
@@ -39,6 +41,7 @@ The complete expanded tumor graph is composed by three types of edges:
 1. a directed edge `A->-B` denotes that the alteration `A` is an anchestor of the alteration `B`
 2. an undirected edge `A-/-B` denotes that `A` and `B` belong to different branches of the tree
 3. an undirected edge `A-?-B` denotes that the order between `A` and `B` is not known (they belong to the same node)
+
 Note that the last two edges are undirected, therefore the alterations are meant to be sorted alphabetically (i.e., `A-?-B` is correct, `B-?-A` is not).
 (it is not necessary to include the edges incident to the germline node to find trajetories composed by at least 2 alterations; otherwise, use `g` to denote the germline node)
 
