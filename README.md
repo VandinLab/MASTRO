@@ -1,6 +1,6 @@
 # MASTRO: Discovering Significant Evolutionary Trajectories in Cancer Phylogenies
 
-This repository contains the implementation of MASTRO, our algorithm to discover statistically significant conserved evolutionary trajectories of alterations from phylogenetic tumor trees. All details on MASTRO are in the paper (see the `mastro.pdf` file).
+This repository contains the implementation of MASTRO, our algorithm to discover statistically significant conserved evolutionary trajectories of alterations from phylogenetic tumor trees. All details on MASTRO are in the paper, published in Bioinformatics https://doi.org/10.1093/bioinformatics/btac467 
 
 Please address questions and bug reports to Leonardo Pellegrina (leonardo.pellegrina@unipd.it) and Fabio Vandin (fabio.vandin@unipd.it).
 
