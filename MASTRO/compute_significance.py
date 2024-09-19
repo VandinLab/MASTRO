@@ -273,13 +273,14 @@ for line in fin_results:
     line = line.replace("\n","")
     if "(" in line:
         index_p = line.find("(")
-        line_edges_only = line[:index_p]
+        line_edges_only = line[:index_p-1]
         traj_rep_supp = line[index_p:]
         traj_rep_supp = traj_rep_supp.replace("(","")
         traj_rep_supp = int(traj_rep_supp.replace(")",""))
         #print(line)
         #print(line_edges_only)
         trajectory = load_graph(line_edges_only)
+        trajectory_str_to_output = line_edges_only
         # sanity check
         supp_traj , trans_ids = compute_support(trajectory , graphs_list)
         if supp_traj != traj_rep_supp:
@@ -288,7 +289,7 @@ for line in fin_results:
             print("trans_ids",trans_ids)
             print(fin_results.readline())
             print_graph(trajectory)
-        trajectories_list.append((trajectory , supp_traj , trans_ids))
+        trajectories_list.append((trajectory , supp_traj , trans_ids , trajectory_str_to_output))
 
 if verbose == 1:
     print("loaded",len(trajectories_list),"trajectories")
@@ -296,7 +297,7 @@ if verbose == 1:
 min_pval = 1.
 fout_ = open(args.o,"w")
 fout_.write("edges_traj;traj_occ_list;traj_alt_occ_list;traj_supp;traj_freq;traj_exp_ind;traj_var_ind;t_stat_ind;t_stat_norm_ind;pval_ind;traj_exp_perm;traj_var_perm;t_stat_perm;t_stat_norm_perm;pval_perm;traj_exp_topol;traj_var_topol;t_stat_topol;t_stat_norm_topol;pval_topol\n")
-for (trajectory , supp_traj , trans_ids) in trajectories_list:
+for (trajectory , supp_traj , trans_ids , trajectory_str_to_output) in trajectories_list:
     trans_id = 0
     trans_ids_allnodes = []
     for graph_ in graphs_list:
@@ -344,14 +345,16 @@ for (trajectory , supp_traj , trans_ids) in trajectories_list:
         min_pval = min(min_pval,min_pval_cand)
         min_traj = (trajectory , supp_traj , trans_ids)
 
-    str_to_output = "["
-    edge_id = 0
-    for edge in trajectory.edges:
-        if edge_id > 0:
-            str_to_output = str_to_output+","
-        str_to_output = str_to_output+str(edge[0])+"->-"+str(edge[1])
-        edge_id += 1
-    str_to_output = str_to_output+"];"
+    str_to_output = "["+trajectory_str_to_output+"];"
+
+    # edge_id = 0
+    # for edge in trajectory.edges:
+    #     if edge_id > 0:
+    #         str_to_output = str_to_output+","
+    #     str_to_output = str_to_output+str(edge[0])+"->-"+str(edge[1])
+    #     edge_id += 1
+    # str_to_output = str_to_output+"];"
+
     str_to_output = str_to_output+str(trans_ids)+";"
     str_to_output = str_to_output+str(trans_ids_allnodes)+";"
     str_to_output = str_to_output+str(supp_traj)+";"
@@ -389,4 +392,3 @@ if args.minp:
         fout_ = open(args.minp,"a")
         fout_.write(str(min_pval)+"\n")
         fout_.close()
-        

@@ -31,7 +31,7 @@ num_nodes = []
 for traj_edges in df["edges_traj"]:
     traj_edges = traj_edges.replace("[","")
     traj_edges = traj_edges.replace("]","")
-    edges_ = traj_edges.split(",")
+    edges_ = traj_edges.split(" ")
     nodes_set = set()
     for edge_ in edges_:
         edge_sep = "->-"
